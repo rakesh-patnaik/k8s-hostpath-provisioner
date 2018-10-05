@@ -7,7 +7,7 @@ metadata:
   namespace: kube-system
 
 spec:
-  replicas: 3
+  replicas: 1
   revisionHistoryLimit: 0
 
   selector:
@@ -37,9 +37,10 @@ spec:
 
           volumeMounts:
             - name: pv-volume
-              mountPath: /var/kubernetes
-
+              mountPath: /var/hostpath-provisioner
+      nodeSelector:
+        box-sync: "true"
       volumes:
         - name: pv-volume
           hostPath:
-            path: /var/kubernetes
+            path: /tmp/hostpath-provisioner
